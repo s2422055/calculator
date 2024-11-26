@@ -1,4 +1,5 @@
 import flet as ft
+import math
 
 
 class CalcButton(ft.ElevatedButton):
@@ -71,6 +72,7 @@ class CalculatorApp(ft.Container):
                 ),
                 ft.Row(
                     controls=[
+                        ExtraActionButton(text="log", button_clicked=self.button_clicked),
                         DigitButton(text="4", button_clicked=self.button_clicked),
                         DigitButton(text="5", button_clicked=self.button_clicked),
                         DigitButton(text="6", button_clicked=self.button_clicked),
@@ -149,6 +151,10 @@ class CalculatorApp(ft.Container):
                     return n * factorial(n - 1)
 
             self.result.value = factorial(int(self.result.value))
+            self.reset()
+
+        elif data in ("log"):
+            self.result.value = math.log10(float(self.result.value))
             self.reset()
             
         self.update()
