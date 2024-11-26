@@ -90,6 +90,7 @@ class CalculatorApp(ft.Container):
                 ),
                 ft.Row(
                     controls=[
+                        ExtraActionButton(text="√", button_clicked=self.button_clicked),
                         DigitButton(
                             text="0", expand=2, button_clicked=self.button_clicked
                         ),
@@ -163,9 +164,14 @@ class CalculatorApp(ft.Container):
                 self.result.value = str(math.pi)  # πを表示
                 self.new_operand = False
             else:
-                # 既に数字が入力されている場合はπをかける
                 self.result.value = str(math.pi * float(self.result.value))
             
+        elif data in ("√"):
+            try:
+                self.result.value = math.sqrt(float(self.result.value))
+            except ValueError:
+                self.result.value = "Error"
+            self.reset()
         self.update()
 
     def format_number(self, num):
