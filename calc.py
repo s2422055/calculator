@@ -64,6 +64,7 @@ class CalculatorApp(ft.Container):
                 ),
                 ft.Row(
                     controls=[
+                        ExtraActionButton("sin", button_clicked=self.button_clicked),
                         ExtraActionButton("!", button_clicked=self.button_clicked),
                         DigitButton(text="7", button_clicked=self.button_clicked),
                         DigitButton(text="8", button_clicked=self.button_clicked),
@@ -180,6 +181,15 @@ class CalculatorApp(ft.Container):
                 self.new_operand = False
             else:
                 self.result.value = str(math.e * float(self.result.value))
+
+        elif data in ("sin"):
+            try:
+                angle_deg = float(self.result.value)
+                angle_rad = math.radians(angle_deg)
+                self.result.value = math.sin(angle_rad)
+            except ValueError:
+                self.result.value = "Error"
+            self.reset()
 
         self.update()
 
