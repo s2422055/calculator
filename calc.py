@@ -84,6 +84,7 @@ class CalculatorApp(ft.Container):
                 ),
                 ft.Row(
                     controls=[
+                        ExtraActionButton(text="tan", button_clicked=self.button_clicked),
                         ExtraActionButton(text="π", button_clicked=self.button_clicked),
                         DigitButton(text="1", button_clicked=self.button_clicked),
                         DigitButton(text="2", button_clicked=self.button_clicked),
@@ -197,6 +198,15 @@ class CalculatorApp(ft.Container):
                 angle_deg = float(self.result.value)
                 angle_rad = math.radians(angle_deg)
                 self.result.value = math.cos(angle_rad)
+            except ValueError:
+                self.result.value = "Error"
+            self.reset()
+
+        elif data in ("tan"):
+            try:
+                angle_deg = float(self.result.value)
+                angle_rad = math.radians(angle_deg)
+                self.result.value = math.tan(angle_rad)
             except ValueError:
                 self.result.value = "Error"
             self.reset()
