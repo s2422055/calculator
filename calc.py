@@ -74,6 +74,7 @@ class CalculatorApp(ft.Container):
                 ),
                 ft.Row(
                     controls=[
+                        ExtraActionButton(text="cos", button_clicked=self.button_clicked),
                         ExtraActionButton(text="log", button_clicked=self.button_clicked),
                         DigitButton(text="4", button_clicked=self.button_clicked),
                         DigitButton(text="5", button_clicked=self.button_clicked),
@@ -187,6 +188,15 @@ class CalculatorApp(ft.Container):
                 angle_deg = float(self.result.value)
                 angle_rad = math.radians(angle_deg)
                 self.result.value = math.sin(angle_rad)
+            except ValueError:
+                self.result.value = "Error"
+            self.reset()
+
+        elif data in ("cos"):
+            try:
+                angle_deg = float(self.result.value)
+                angle_rad = math.radians(angle_deg)
+                self.result.value = math.cos(angle_rad)
             except ValueError:
                 self.result.value = "Error"
             self.reset()
