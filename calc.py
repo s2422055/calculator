@@ -81,6 +81,7 @@ class CalculatorApp(ft.Container):
                 ),
                 ft.Row(
                     controls=[
+                        ExtraActionButton(text="π", button_clicked=self.button_clicked),
                         DigitButton(text="1", button_clicked=self.button_clicked),
                         DigitButton(text="2", button_clicked=self.button_clicked),
                         DigitButton(text="3", button_clicked=self.button_clicked),
@@ -156,6 +157,14 @@ class CalculatorApp(ft.Container):
         elif data in ("log"):
             self.result.value = math.log10(float(self.result.value))
             self.reset()
+
+        elif data in ("π"):
+            if self.result.value == "0" or self.new_operand == True:
+                self.result.value = str(math.pi)  # πを表示
+                self.new_operand = False
+            else:
+                # 既に数字が入力されている場合はπをかける
+                self.result.value = str(math.pi * float(self.result.value))
             
         self.update()
 
