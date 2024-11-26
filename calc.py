@@ -51,6 +51,7 @@ class CalculatorApp(ft.Container):
                         ExtraActionButton(
                             text="^", button_clicked=self.button_clicked
                         ),
+                        ExtraActionButton(text="e", button_clicked=self.button_clicked),
                         ExtraActionButton(
                             text="AC", button_clicked=self.button_clicked
                         ),
@@ -172,6 +173,14 @@ class CalculatorApp(ft.Container):
             except ValueError:
                 self.result.value = "Error"
             self.reset()
+
+        elif data in ("e"):
+            if self.result.value == "0" or self.new_operand == True:
+                self.result.value = str(math.e)
+                self.new_operand = False
+            else:
+                self.result.value = str(math.e * float(self.result.value))
+
         self.update()
 
     def format_number(self, num):
