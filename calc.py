@@ -62,6 +62,7 @@ class CalculatorApp(ft.Container):
                 ),
                 ft.Row(
                     controls=[
+                        ExtraActionButton("!", button_clicked=self.button_clicked),
                         DigitButton(text="7", button_clicked=self.button_clicked),
                         DigitButton(text="8", button_clicked=self.button_clicked),
                         DigitButton(text="9", button_clicked=self.button_clicked),
@@ -140,6 +141,16 @@ class CalculatorApp(ft.Container):
                     self.format_number(abs(float(self.result.value)))
                 )
 
+        elif data in ("!"):
+            def factorial(n):
+                if n == 0:
+                    return 1
+                else:
+                    return n * factorial(n - 1)
+
+            self.result.value = factorial(int(self.result.value))
+            self.reset()
+            
         self.update()
 
     def format_number(self, num):
