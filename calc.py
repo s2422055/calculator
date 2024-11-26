@@ -48,6 +48,9 @@ class CalculatorApp(ft.Container):
                 ft.Row(
                     controls=[
                         ExtraActionButton(
+                            text="^", button_clicked=self.button_clicked
+                        ),
+                        ExtraActionButton(
                             text="AC", button_clicked=self.button_clicked
                         ),
                         ExtraActionButton(
@@ -107,7 +110,7 @@ class CalculatorApp(ft.Container):
             else:
                 self.result.value = self.result.value + data
 
-        elif data in ("+", "-", "*", "/"):
+        elif data in ("+", "-", "*", "/", "^"):
             self.result.value = self.calculate(
                 self.operand1, float(self.result.value), self.operator
             )
@@ -161,6 +164,10 @@ class CalculatorApp(ft.Container):
                 return "Error"
             else:
                 return self.format_number(operand1 / operand2)
+
+        elif operator == "^":
+            return self.format_number(operand1 ** operand2)
+
 
     def reset(self):
         self.operator = "+"
